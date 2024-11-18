@@ -1,0 +1,21 @@
+app:
+  name: "cr_service"
+  version: "1.0.0"
+
+http_server:
+  host: "127.0.0.1"
+  port: 8080
+
+grpc_server:
+  host: "127.0.0.1"
+  port: 50051
+
+database:
+  user: "db_user"
+  password: "db_password"
+  name: "my_database"
+  host: "db_host"
+  port: 5432
+
+marine_wave_height_forecast:
+  url: "https://marine-api.open-meteo.com/v1/marine"

@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package example;
+
+option go_package = ".";
+
+service WeatherForecastService {
+  // Define the method
+  rpc GetMarineWaveHeight (MarineWaveHeightForecastReq) returns (MarineForecast);
+}
+
+// Request message
+message MarineWaveHeightForecastReq {
+  string latitude = 1;
+  string longitude = 2;
+}
+// HourlyUnits defines the units for hourly data
+message HourlyUnits {
+  string time = 1;
+  string wave_height = 2;
+}
+
+// Hourly defines the hourly data
+message Hourly {
+  repeated string time = 1;
+  repeated double wave_height = 2;
+}
+
+// MarineForecast defines the response message
+message MarineForecast {
+  double latitude = 1;
+  double longitude = 2;
+  double generation_time_ms = 3;
+  int32 utc_offset_seconds = 4;
+  string timezone = 5;
+  string timezone_abbreviation = 6;
+  double elevation = 7;
+  HourlyUnits hourly_units = 8;
+  Hourly hourly = 9;
+}
