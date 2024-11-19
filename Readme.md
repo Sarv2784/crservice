@@ -4,7 +4,7 @@ make build  - to build code
 
 
 You should be able to run the code using.
-go run main.go -config=app/config
+go run app/main.go -config=app/config
 
 If using Goland which I use please use the config in this screenshot
 ![img.png](img.png)
