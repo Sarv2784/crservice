@@ -25,7 +25,6 @@ func (h *WeatherForecastHandler) GetMarineWaveHeight(c *gin.Context) {
 		return
 	}
 	var params model.MarineWaveHeightForecastReq
-
 	if err := c.Bind(&params); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"data": nil})
 		return
