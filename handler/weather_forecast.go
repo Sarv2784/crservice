@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"crservice/app/middleware"
+	"crservice/app/context"
 	"crservice/model"
 	"crservice/usecase"
 	"github.com/gin-gonic/gin"
@@ -19,7 +19,7 @@ func NewWeatherForecastHandler(useCase usecase.IWeatherForecastUseCase) *Weather
 }
 
 func (h *WeatherForecastHandler) GetMarineWaveHeight(c *gin.Context) {
-	ctx := middleware.GetRequestContext(c)
+	ctx := context.NewContext(c)
 	var params model.MarineWaveHeightForecastReq
 
 	if err := c.Bind(&params); err != nil {

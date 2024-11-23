@@ -9,30 +9,26 @@ import (
 func TestLoadConfig(t *testing.T) {
 	tempDir := t.TempDir()
 	validConfig := `server:
-					  host: "127.0.0.1"
-					  port: 8080
-					grpc:
-					  host: "127.0.0.1"
-					  port: 50051
-					database:
-					  host: "localhost"
-					  port: 5432
-					  username: "admin"
-					  password: "password"
-					`
+  host: "127.0.0.1"
+  port: 8080
+grpc:
+  host: "127.0.0.1"
+  port: 50051
+database:
+  host: "localhost"
+  port: 5432
+  username: "admin"
+  password: "password"`
 	invalidConfig := `server:
 						  host: "127.0.0.1"
 						  port: "not-a-number"  # Invalid port value
 						`
-
-	// Write valid config to a file
 	validFilePath := tempDir + "/config.yaml"
 	err := os.WriteFile(validFilePath, []byte(validConfig), 0644)
 	if err != nil {
 		t.Fatalf("Failed to write valid config file: %v", err)
 	}
 
-	// Write invalid config to a file
 	invalidFilePath := tempDir + "/invalid_config.yaml"
 	err = os.WriteFile(invalidFilePath, []byte(invalidConfig), 0644)
 	if err != nil {

@@ -1,4 +1,4 @@
-package middleware
+package context
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func ContextWIthTimeout() gin.HandlerFunc {
+func CreateContextWIthTimeout() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
 		defer cancel()
@@ -14,7 +14,7 @@ func ContextWIthTimeout() gin.HandlerFunc {
 		c.Next()
 	}
 }
-func GetRequestContext(c *gin.Context) context.Context {
+func NewContext(c *gin.Context) context.Context {
 	if ctx, exists := c.Get("requestContext"); exists {
 		if reqCtx, ok := ctx.(context.Context); ok {
 			return reqCtx

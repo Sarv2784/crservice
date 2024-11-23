@@ -2,7 +2,7 @@ package router
 
 import (
 	"crservice/app/config"
-	"crservice/app/middleware"
+	"crservice/app/context"
 	"crservice/dal"
 	"crservice/handler"
 	"crservice/usecase"
@@ -11,7 +11,7 @@ import (
 
 func InitializeRouter(config *config.Config) *gin.Engine {
 	router := gin.Default()
-	router.Use(middleware.ContextWIthTimeout())
+	router.Use(context.CreateContextWIthTimeout())
 
 	dalInstance := dal.NewWeatherForecastDAL(config)
 	useCaseInstance := usecase.NewWeatherForecastUseCase(dalInstance)
