@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"crservice/app/context"
+	"crservice/app/middleware/context"
 	"crservice/model"
 	"crservice/usecase"
 	"github.com/gin-gonic/gin"
@@ -20,20 +20,24 @@ func NewWeatherForecastHandler(useCase usecase.IWeatherForecastUseCase) *Weather
 
 func (h *WeatherForecastHandler) GetMarineWaveHeight(c *gin.Context) {
 	ctx := context.NewContext(c)
+	if ctx == nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"data": nil})
+		return
+	}
 	var params model.MarineWaveHeightForecastReq
 
 	if err := c.Bind(&params); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		c.JSON(http.StatusBadRequest, gin.H{"data": nil})
 		return
 	}
 	if params.Longitude == "" || params.Latitude == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid query params"})
+		c.JSON(http.StatusBadRequest, gin.H{"data": nil})
 		return
 	}
 
 	result, err := h.weatherForecastUseCase.GetMarineWaveHeight(&ctx, &params)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"data": nil})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"data": result})

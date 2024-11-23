@@ -2,7 +2,7 @@ package router
 
 import (
 	"crservice/app/config"
-	"crservice/app/context"
+	"crservice/app/middleware/context"
 	"crservice/dal"
 	"crservice/handler"
 	"crservice/usecase"
