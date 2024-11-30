@@ -46,6 +46,9 @@ func (d *WeatherForecastDAL) GetMarineWaveHeight(ctx *context.Context, params mo
 }
 
 func parseMarineWaveHeightResponse(err error, response []byte) (*entity.MarineForecast, error) {
+	if response == nil {
+		return nil, fmt.Errorf("marine forecast response is empty")
+	}
 	var marineForecast *entity.MarineForecast
 	err = json.Unmarshal(response, &marineForecast)
 	if err != nil {
