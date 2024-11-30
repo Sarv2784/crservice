@@ -38,20 +38,20 @@ func (d *WeatherForecastDAL) GetMarineWaveHeight(ctx *context.Context, params mo
 		return nil, err
 	}
 
-	marineForecast, forecast, err2 := parseMarineWaveHeightResponse(err, response)
-	if err2 != nil {
-		return forecast, err2
+	marineForecast, err := parseMarineWaveHeightResponse(err, response)
+	if err != nil {
+		return nil, err
 	}
 	return marineForecast, nil
 }
 
-func parseMarineWaveHeightResponse(err error, response []byte) (*entity.MarineForecast, *entity.MarineForecast, error) {
+func parseMarineWaveHeightResponse(err error, response []byte) (*entity.MarineForecast, error) {
 	var marineForecast *entity.MarineForecast
 	err = json.Unmarshal(response, &marineForecast)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	return marineForecast, nil, nil
+	return marineForecast, nil
 }
 
 func generateMarineWaveHeightForecastParams(params model.MarineWaveHeightForecastReq) (map[string]string, error) {
